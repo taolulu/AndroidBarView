@@ -1,9 +1,11 @@
 # AndroidBarView
-My project display percentages with this simple bar view.  一个用来显示百分比的简单柱形控件。
-
+My project display percentages with this simple bar view.  
+一个用来显示百分比的简单柱形控件。
+#Feature
+Update/reset value with animation.
 更新或设置值的时候会有平滑的过渡效果。
 #Usage
-default sample
+sample with default value
 ```xml
 <com.practice.barView.BarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
