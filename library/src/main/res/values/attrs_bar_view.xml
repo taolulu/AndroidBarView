@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="BarView">
+        <attr name="progress_color" format="color"/>
+        <attr name="anim_duration" format="integer"/>
+        <attr name="percent" format="integer"/>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="innerCorner" format="boolean"/>
+    </declare-styleable>
+</resources>
