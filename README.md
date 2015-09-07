@@ -11,9 +11,9 @@ sample
         android:layout_height="40dp"
         android:id="@+id/bar_view"
         app:cornerRadius="10dp"
-        app:innerCorner="true"
-        app:progress_color=""
-        app:backgroundColor=""
-        app:anim_duration=""
-        app:percent=""/>
+        app:innerCorner="false"
+        app:barColor="@android:color/holo_orange_dark"
+        app:backgroundColor="@android:color/holo_blue_dark"
+        app:animDuration="500"
+        app:percent="40"/>
 ```
