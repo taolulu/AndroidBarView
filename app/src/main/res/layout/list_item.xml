@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="#ffffff"
-        app:progress_color="@color/default_progress_color"
+        app:barColor="@color/default_progress_color"
         />
 
     <TextView

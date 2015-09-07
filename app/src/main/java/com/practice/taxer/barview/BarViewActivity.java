@@ -20,7 +20,7 @@ public class BarViewActivity extends AppCompatActivity {
         percentText = (TextView) findViewById(R.id.percentText);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         barView = (BarView) findViewById(R.id.bar_view);
-        barView.refreshPercent(40);
+        barView.resetPercent(40);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

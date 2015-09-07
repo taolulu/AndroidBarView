@@ -75,11 +75,11 @@ public class BarView extends View {
         int defaultProgressColor = getResources().getColor(android.R.color.holo_orange_light);
 
 
-        progressColor = a.getColor(R.styleable.BarView_progress_color, defaultProgressColor);
+        progressColor = a.getColor(R.styleable.BarView_barColor, defaultProgressColor);
 
         currentPercent = a.getInt(R.styleable.BarView_percent, 0);
 
-        animDuration = a.getInt(R.styleable.BarView_anim_duration, 500);
+        animDuration = a.getInt(R.styleable.BarView_animDuration, 500);
 
         cornerRadius = a.getDimension(R.styleable.BarView_cornerRadius, 0);
 
@@ -204,7 +204,7 @@ public class BarView extends View {
      * 直接显示设置的百分比
      * @param percent 百分比0-100
      * */
-    public void setPercent(int percent){
+    public void resetPercent(int percent){
         withAnimation = false;
         isProgressMode = false;
         setProgressPercent(percent);
@@ -215,7 +215,7 @@ public class BarView extends View {
      * 设置百分比，带动画效果
      * @param percent 百分比0-100
      * */
-    public void refreshPercent(int percent){
+    public void resetPercentSmoothly(int percent){
         withAnimation = true;
         isProgressMode = false;
         setProgressPercent(percent);

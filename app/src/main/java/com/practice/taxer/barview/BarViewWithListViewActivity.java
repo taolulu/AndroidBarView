@@ -75,7 +75,7 @@ public class BarViewWithListViewActivity extends AppCompatActivity {
 
             }
             if(performed.contains(new Integer(position))){
-                viewHolder.barView.setPercent(percents.get(position));
+                viewHolder.barView.resetPercent(percents.get(position));
             }else {
                 viewHolder.barView.updatePercent(percents.get(position));
                 performed.add(new Integer(position));
