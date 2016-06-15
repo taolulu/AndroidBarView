@@ -1,11 +1,13 @@
 package com.practice.taxer.barview;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.practice.barView.BarView;
+import com.practice.barView.OverLayColor;
 
 public class BarViewActivity extends AppCompatActivity {
 
@@ -21,6 +23,9 @@ public class BarViewActivity extends AppCompatActivity {
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         barView = (BarView) findViewById(R.id.bar_view);
         barView.resetPercent(40);
+        OverLayColor overLayColor = new OverLayColor(Color.rgb(255, 127, 209),
+                0, 15, 0, 0);
+        barView.addOverlayColor(overLayColor);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -38,6 +43,8 @@ public class BarViewActivity extends AppCompatActivity {
                 barView.updatePercent(seekBar.getProgress());
             }
         });
+
+//        barView.clearOverlayColor();
     }
 
 }

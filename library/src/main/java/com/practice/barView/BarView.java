@@ -2,10 +2,13 @@ package com.practice.barView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Handler;
@@ -13,6 +16,9 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用来静态显示百分比的柱形图
@@ -51,6 +57,13 @@ public class BarView extends View {
     private boolean isProgressMode = false;//进度条的刷新模式是基于当前值更新还是从0开始
 
     private boolean withAnimation = false;//动画效果
+
+
+    private List<OverLayColor> overLayColors = new ArrayList<>();
+
+    private static final int LAYER_FLAGS = Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG
+                     | Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.FULL_COLOR_LAYER_SAVE_FLAG
+                     | Canvas.CLIP_TO_LAYER_SAVE_FLAG;
 
 
     public BarView(Context context) {
@@ -142,9 +155,32 @@ public class BarView extends View {
         //绘制背景和进度条，此时进度条宽度为0
         canvas.drawRoundRect(backgroundRect, cornerRadius, cornerRadius, backgroundPaint);
         if(innerCorner){
+            progressPaint.setColor(progressColor);
             canvas.drawRoundRect(progressRect, cornerRadius, cornerRadius,progressPaint);
+            for (OverLayColor overLayColor : overLayColors) {
+                canvas.saveLayerAlpha(progressRect, 0xff, LAYER_FLAGS);
+                RectF rect = new RectF(0 + overLayColor.getMarginLeft()
+                        , 0 + overLayColor.getMarginTop()
+                        , progressRect.right - overLayColor.getMarginRight()
+                        , progressRect.bottom - overLayColor.getMarginBottom());
+                progressPaint.setColor(overLayColor.getColor());
+                canvas.drawRoundRect(rect, cornerRadius, cornerRadius,progressPaint);
+            }
+
+
+
         }else {
+            progressPaint.setColor(progressColor);
             canvas.drawRect(progressRect, progressPaint);
+            for (OverLayColor overLayColor : overLayColors) {
+                canvas.saveLayerAlpha(progressRect, 0xff, LAYER_FLAGS);
+                RectF rect = new RectF(progressRect.left + overLayColor.getMarginLeft()
+                        , progressRect.top + overLayColor.getMarginTop()
+                        , progressRect.right - overLayColor.getMarginRight()
+                        , progressRect.bottom - overLayColor.getMarginBottom());
+                progressPaint.setColor(overLayColor.getColor());
+                canvas.drawRect(rect,progressPaint);
+            }
         }
         //将进度条绘制为初始值，仅初始化时有效
         if(isInit){
@@ -250,6 +286,15 @@ public class BarView extends View {
         withAnimation = false;
     }
 
+    public void addOverlayColor(OverLayColor overLayColor){
+        overLayColors.add(overLayColor);
+        postInvalidate();
+    }
+
+    public void clearOverlayColor(){
+        overLayColors.clear();
+        postInvalidate();
+    }
 
 
 
